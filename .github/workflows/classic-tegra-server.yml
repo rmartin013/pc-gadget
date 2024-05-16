@@ -15,8 +15,10 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   tegra-classic:
-    # The type of runner that the job will run on
-    runs-on: [ self-hosted , jammy, large, ARM64 ]
+    strategy:
+      matrix:
+        arch: [ ARM64 ]
+    runs-on: [ self-hosted , "${{ matrix.arch }}" ]
     steps:
     - name: Install pre-requisites
       run: |
